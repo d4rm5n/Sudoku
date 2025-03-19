@@ -173,3 +173,52 @@ def n_uv(self):
                     print("\033[91mOpción inválida! Use 1, 2 o 3\033[0m")
                     self.n_cl()
                     self.n_ui()
+
+# Manejo de opción "Rendirse"
+            if op == '3':
+                self.n_cl()
+                print("\n\033[91mSolución del Sudoku:\033[0m")
+                # Muestra solución completa con colores:
+                # - Azul: pistas originales
+                # - Verde: números correctos del usuario
+                # - Amarillo: números incorrectos del usuario
+                for i in range(9):
+                    for j in range(9):
+                        sol_val = self.n_qa[i][j]
+                        usu_val = self.n_vb[i][j]['v']
+                        
+                        if self.n_vb[i][j]['f']:
+                            color = '\033[94m'  # Pistas originales
+                        else:
+                            color = '\033[92m' if usu_val == sol_val else '\033[93m'  # Correcto/Incorrecto
+                        
+                        print(f"{color}{sol_val}\033[0m", end=' ')
+                    print()
+                input("\nPresione Enter para salir...")
+                sys.exit()
+            
+            # Captura de posición válida
+            while True:
+                try:
+                    n_r = self.n_vn("Fila (1-9): ", (1,9)) - 1  # Ajuste a índice 0-based
+                    n_c = self.n_vn("Columna (1-9): ", (1,9)) - 1
+                    
+                    # Valida que no sea posición bloqueada (pista)
+                    if self.n_vb[n_r][n_c]['f']:
+                        print("\033[91m¡Posición bloqueada!\033[0m")
+                        self.n_cl()
+                        self.n_ui()
+                        continue
+                    break
+                except: pass  # Maneja errores en conversión numérica
+            
+            # Manejo de acciones del usuario
+            if op == '2':  # Borrar número
+                self.n_vb[n_r][n_c]['v'] = 0
+            elif op == '1':  # Ingresar número
+                n_v = self.n_vn("Número (1-9): ", (1,9))
+                self.n_vb[n_r][n_c]['v'] = n_v
+
+if _name_ == "_main_":
+    n_app = nXzq()
+    n_app.n_ug()
