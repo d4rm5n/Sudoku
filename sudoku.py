@@ -99,9 +99,9 @@ class nXzq:
                 # Formato visual con separadores verticales
                 sep = " | " if (n_j+1)%3==0 and n_j!=8 else "  "
                 print(f"{n_c}{n_d if n_d!=0 else ' '}\033[0m", end=sep)
-            print()
-
-def n_uv(self):
+            print()
+    
+    def n_uv(self):
         """
         Actualiza el estado de errores y verifica si el juego está completo
         Returns:
@@ -173,8 +173,8 @@ def n_uv(self):
                     print("\033[91mOpción inválida! Use 1, 2 o 3\033[0m")
                     self.n_cl()
                     self.n_ui()
-
-# Manejo de opción "Rendirse"
+            
+            # Manejo de opción "Rendirse"
             if op == '3':
                 self.n_cl()
                 print("\n\033[91mSolución del Sudoku:\033[0m")
@@ -219,6 +219,6 @@ def n_uv(self):
                 n_v = self.n_vn("Número (1-9): ", (1,9))
                 self.n_vb[n_r][n_c]['v'] = n_v
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     n_app = nXzq()
-    n_app.n_ug()
+    n_app.n_ug()
